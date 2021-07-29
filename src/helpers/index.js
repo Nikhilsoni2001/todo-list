@@ -1,4 +1,4 @@
-import { collatedTasks } from "../constants/index";
+import { collatedTasks } from "../constants";
 
 export const getTitle = (projects, projectId) =>
   projects.find((project) => project.projectId === projectId);

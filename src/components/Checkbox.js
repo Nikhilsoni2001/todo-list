@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { firebase } from "../firebase";
 
 export const Checkbox = ({ id }) => {
@@ -17,4 +18,9 @@ export const Checkbox = ({ id }) => {
       <span className="checkbox" />
     </div>
   );
+};
+
+Checkbox.propTypes = {
+  id: PropTypes.string.isRequired,
+  taskDesc: PropTypes.string.isRequired,
 };

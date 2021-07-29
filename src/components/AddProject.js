@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useProjectsValue } from "../context";
-import { generatePushId } from "../helpers";
+import PropTypes from "prop-types";
 import { firebase } from "../firebase";
+import { generatePushId } from "../helpers";
+import { useProjectsValue } from "../context";
 
-function AddProject({ shouldShow = false }) {
+export const AddProject = ({ shouldShow = false }) => {
   const [show, setShow] = useState(shouldShow);
   const [projectName, setProjectName] = useState("");
 
   const projectId = generatePushId();
-  const { setProjects } = useProjectsValue();
+  const { projects, setProjects } = useProjectsValue();
 
   const addProject = () =>
     projectName &&
@@ -21,13 +22,14 @@ function AddProject({ shouldShow = false }) {
         userId: "123456",
       })
       .then(() => {
-        setProjects([]);
+        setProjects([...projects]);
         setProjectName("");
         setShow(false);
       });
 
   return (
     <div className="add-project" data-testid="add-project">
+      {/* input */}
       {show && (
         <div className="add-project__input">
           <input
@@ -50,22 +52,35 @@ function AddProject({ shouldShow = false }) {
             data-testid="hide-project-overlay"
             className="add-project__cancel"
             onClick={() => setShow(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") setShow(false);
+            }}
+            role="button"
+            tabIndex={0}
           >
             Cancel
           </span>
         </div>
       )}
 
+      {/* display */}
       <span className="add-project__plus">+</span>
       <span
         className="add-project__text"
         data-testid="add-project-action"
         onClick={() => setShow(!show)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") setShow(!show);
+        }}
+        role="button"
+        tabIndex={0}
       >
         Add Project
       </span>
     </div>
   );
-}
+};
 
-export default AddProject;
+AddProject.propTypes = {
+  shouldShow: PropTypes.bool,
+};
