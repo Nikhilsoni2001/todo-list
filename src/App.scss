@@ -116,6 +116,11 @@ $generic-bg: #db4c3f;
   }
 }
 
+@mixin transparent-button {
+  background-color: transparent;
+  border: none;
+}
+
 // Dark Mode
 .darkmode {
   header {
@@ -179,7 +184,6 @@ nav {
           @include va;
 
           list-style-type: none;
-          cursor: pointer;
           width: 30px;
           height: 30px;
           text-align: center;
@@ -194,11 +198,25 @@ nav {
           &.settings__add {
             margin-right: 15px;
             font-size: 30px;
+
+            button {
+              @include transparent-button();
+              color: white;
+              cursor: pointer;
+            }
           }
 
-          &.settings__darkmode svg {
-            width: 20px;
-            height: 20px;
+          &.settings__darkmode {
+            button {
+              @include transparent-button();
+              color: white;
+              cursor: pointer;
+              display: flex;
+              svg {
+                width: 20px;
+                height: 20px;
+              }
+            }
           }
         }
       }
@@ -229,13 +247,20 @@ nav {
       display: -ms-flexbox;
       display: flex;
     }
-    padding-left: 10px;
-    padding-right: 15px;
   }
 
   &__project {
-    padding: 5px 0;
     cursor: pointer;
+
+    div:nth-child(1) {
+      padding: 5px 0;
+      padding-left: 10px;
+      padding-right: 15px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
     &-delete {
       margin-left: auto;
       display: none;
@@ -299,7 +324,6 @@ nav {
     margin-bottom: 20px;
     display: flex;
     border-bottom: $generic-border;
-    padding-left: 10px;
     cursor: pointer;
 
     span {
@@ -322,23 +346,33 @@ nav {
 
   &__generic {
     li {
-      padding: 10px 0 10px 10px;
       list-style-type: none;
       color: #333;
       display: flex;
       cursor: pointer;
       line-height: 1.5;
       font-size: 15px;
+      padding-left: 0;
+      padding-right: 0;
 
-      span:first-of-type {
-        margin-right: 10px;
+      div:nth-child(1) {
+        display: flex;
+        padding: 10px 0 10px 10px;
+        width: 100%;
 
-        svg {
-          width: 18px;
-          height: 18px;
-          color: #555;
+        span:first-of-type {
+          margin-right: 10px;
+          display: flex;
+          align-items: center;
+
+          svg {
+            width: 18px;
+            height: 18px;
+            color: #555;
+          }
         }
       }
+
       &.active,
       &:hover {
         font-weight: bold;
@@ -565,12 +599,20 @@ nav {
 
   &__list li {
     @include task-item();
+    padding: 0;
 
-    span:first-of-type {
-      margin-right: 10px;
+    div:nth-child(1) {
+      padding: 10px;
+      width: 100%;
+      display: flex;
+      align-items: center;
 
-      svg {
-        fill: grey;
+      span:first-of-type {
+        margin-right: 10px;
+
+        svg {
+          fill: grey;
+        }
       }
     }
   }
@@ -583,6 +625,12 @@ nav {
 
   &__list li {
     @include task-item();
+    padding: 0;
+
+    div:nth-child(1) {
+      width: 100%;
+      padding: 10px;
+    }
   }
 }
 

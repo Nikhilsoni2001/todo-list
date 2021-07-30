@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { useProjectsValue, useSelectedProjectValue } from "../context";
+import {
+  SelectedProjectContext,
+  useProjectsValue,
+  useSelectedProjectValue,
+} from "../context";
 import { IndividualProject } from "./IndividualProject";
 
 export const Projects = ({ activeValue = null }) => {
@@ -19,18 +23,24 @@ export const Projects = ({ activeValue = null }) => {
             ? "active sidebar__project"
             : "sidebar__project"
         }
-        onClick={() => {
-          setActive(project.projectId);
-          setSelectedProject(project.projectId);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
+      >
+        <div
+          role="button"
+          tabIndex={0}
+          aria-label={`Select ${project.name} as the task project`}
+          onClick={() => {
             setActive(project.projectId);
             setSelectedProject(project.projectId);
-          }
-        }}
-      >
-        <IndividualProject project={project} />
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setActive(project.projectId);
+              setSelectedProject(project.projectId);
+            }
+          }}
+        >
+          <IndividualProject project={project} />
+        </div>
       </li>
     ))
   );

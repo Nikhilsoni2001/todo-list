@@ -22,6 +22,7 @@ export const Sidebar = () => {
           className={active === "inbox" ? "active" : undefined}
         >
           <div
+            aria-label="Show inbox tasks"
             data-testid="inbox-action"
             aria-label="Show inbox tasks"
             tabIndex={0}
@@ -49,8 +50,8 @@ export const Sidebar = () => {
           className={active === "today" ? "active" : undefined}
         >
           <div
-            data-testod="today-action"
             aria-label="Show today's tasks"
+            data-testid="today-action"
             tabIndex={0}
             role="button"
             onClick={() => {
